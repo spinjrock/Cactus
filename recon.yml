@@ -9,21 +9,41 @@
         command: hostname
         register: hostname
 
+      - name: Print hostname
+        debug:
+          msg: '{{ hostname.stdout }}'
+
       - name: Get /etc/os-release
         command: cat /etc/os-release
         register: os
+
+      - name: Print os-release
+        debug:
+          msg: '{{ os.stdout }}'
 
       - name: Get IP Addresses
         command: ip addr show
         register: ips
 
+      - name: Print Ip Addresses
+        debug:
+          msg: '{{ ips.stdout }}'
+
       - name: Get users
         command: cat /etc/passwd
         register: passwd
 
+      - name: Print Users
+        debug:
+          msg: '{{ passwd.stdout }}'
+
       - name: Get services
         command: systemctl list-units --type=service
         register: services
+
+      - name: Print Services
+        debug:
+          msg: '{{ services.stdout }}'
 
       - name: Get listening ports
         command:
@@ -33,23 +53,12 @@
             - -n
         register: lsof
 
+      - name: Print Listening Ports
+        debug:
+          msg: '{{ lsof.stdout }}'
+
       - name: Creating output file
         delegate_to: localhost
-        ansible.builtin.copy:
+        template:
+          src: basic_temp.txt.j2
           dest: "{{ hostname.stdout }}-Enum.txt"
-          content: |
-            OS INFORMATION:
-            {{ os.stdout }}
-            
-            IP INFORMATION:
-            {{ ips.stdout }}
-
-            USERS:
-            {{ passwd.stdout }}
-
-            RUNNING SERVICES:
-            {{ services.stdout }}
-
-            LISTENING PORTS:
-            {{ lsof.stdout }}
-

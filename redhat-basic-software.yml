@@ -13,3 +13,8 @@
   dnf:
     pkg: tmux
     state: latest
+
+- name: Install git
+  dnf:
+    pkg: git
+    state: latest

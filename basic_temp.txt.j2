@@ -1,0 +1,16 @@
+HOSTNAME: {{ hostname.stdout }}
+
+OS INFORMATION:
+{{ os.stdout}}
+
+IP INFORMATION
+{{ ips.stdout }}
+
+USERS:
+{{ passwd.stdout }}
+
+RUNNING SERVICES:
+{{ services.stdout }}
+
+LISTENING PORTS:
+{{ lsof.stdout }}
