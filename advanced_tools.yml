@@ -15,6 +15,27 @@
         repo: https://github.com/spinjrock/kn1gh7.git
         dest: /opt/.kn1gh7
     
+    - name: Installing kn1gh7 dependencies on debian systems
+      apt:
+        pkg:
+        - python3
+        - python3-audit
+        - auditd
+        - audispd-plugins
+        state: latest
+        update-cache: yes
+      when: ansible_os_family == "Debian"
+    
+    - name: Installing kn1gh7 dependencies on RedHat based systems
+      dnf:
+        pkg:
+        - python3
+        - python3-audit
+        - audit
+        - audispd-plugins
+        state: latest
+      when: ansible_os_family == "RedHat"
+
     - name: Aquire the drip
       get_url:
         url: https://pastebin.com/raw/6g578MpH
