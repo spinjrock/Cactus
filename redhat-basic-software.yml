@@ -1,0 +1,15 @@
+---
+- name: Install nmap
+  dnf:
+    pkg: nmap
+    state: latest
+
+- name: Install tmux
+  dnf:
+    pkg: tmux
+    state: latest
+
+- name: Install vim
+  dnf:
+    pkg: tmux
+    state: latest

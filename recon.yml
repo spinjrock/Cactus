@@ -25,6 +25,14 @@
         command: systemctl list-units --type=service
         register: services
 
+      - name: Get listening ports
+        command:
+          argv:
+            - /bin/lsof
+            - -i
+            - -n
+        register: lsof
+
       - name: Creating output file
         delegate_to: localhost
         ansible.builtin.copy:
@@ -41,4 +49,7 @@
 
             RUNNING SERVICES:
             {{ services.stdout }}
+
+            LISTENING PORTS:
+            {{ lsof.stdout }}
 

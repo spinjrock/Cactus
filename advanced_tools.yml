@@ -1,0 +1,34 @@
+---
+- name: Installing advanced tools
+  hosts: comp
+  become: true
+
+  tasks:
+
+    - name: git clone artillery
+      git:
+        repo: https://github.com/BinaryDefense/artillery.git
+        dest: /opt/.artillery
+
+    - name: git clone kn1gh7
+      git:
+        repo: https://github.com/spinjrock/kn1gh7.git
+        dest: /opt/.kn1gh7
+    
+    - name: Aquire the drip
+      get_url:
+        url: https://pastebin.com/raw/6g578MpH
+        dest: /opt/.drip_goku.txt
+        mode: 0600
+
+    - name: Fat yoshi time
+      get_url:
+        url: https://pastebin.com/raw/Zunkgn7G
+        dest: /opt/.fat_yoshi.txt
+        mode: 0600
+
+    - name: Amogus
+      get_url:
+        url: https://pastebin.com/raw/yAn1gw53
+        dest: /opt/.jerma_sus.txt
+        mode: 0600

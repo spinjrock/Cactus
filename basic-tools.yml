@@ -1,0 +1,14 @@
+---
+- name: Basic Software Setups
+  hosts: comp
+  become: true
+
+  tasks:
+
+    - name: Install Debian Software
+      include_tasks: debian-basic-software.yml
+      when: ansible_os_family == 'Debian'
+
+    - name: Install RedHat Software
+      include_tasks: redhat-basic-software.yml
+      when: ansible_os_family == 'RedHat'
