@@ -1,6 +1,6 @@
 ---
   - name: Enumeration
-    hosts: localhost
+    hosts: comp
     become: true
 
     tasks:
