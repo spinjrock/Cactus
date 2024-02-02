@@ -1,0 +1,44 @@
+---
+  - name: Enumeration
+    hosts: localhost
+    become: true
+
+    tasks:
+
+      - name: Get hostname
+        command: hostname
+        register: hostname
+
+      - name: Get /etc/os-release
+        command: cat /etc/os-release
+        register: os
+
+      - name: Get IP Addresses
+        command: ip addr show
+        register: ips
+
+      - name: Get users
+        command: cat /etc/passwd
+        register: passwd
+
+      - name: Get services
+        command: systemctl list-units --type=service
+        register: services
+
+      - name: Creating output file
+        delegate_to: localhost
+        ansible.builtin.copy:
+          dest: "{{ hostname.stdout }}-Enum.txt"
+          content: |
+            OS INFORMATION:
+            {{ os.stdout }}
+            
+            IP INFORMATION:
+            {{ ips.stdout }}
+
+            USERS:
+            {{ passwd.stdout }}
+
+            RUNNING SERVICES:
+            {{ services.stdout }}
+
